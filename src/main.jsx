@@ -8,7 +8,7 @@ import Error from './pages/Error';
 import App from './App';
 import Authenticate from './pages/Authenticate';
 import Home from './pages/Home';
-import Scheduling from './pages/Scheduling';
+import Appointments from './pages/Appointments';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/agendamento',
-        element: <Scheduling/>
+        element: <Appointments/>
       },
       {
         path: 'registro',

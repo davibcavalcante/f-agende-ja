@@ -8,7 +8,7 @@ export const getInputs = (action) => {
         inputs = [
             { type: 'text', name: 'name', placeholder: 'Nome...', label: 'Nome Completo:' },
             ...inputs,
-            { type: 'text', name: 'mae', placeholder: 'Nome da Mãe...', label: 'Nome da Mãe:' },
+            { type: 'text', name: 'mother', placeholder: 'Nome da Mãe...', label: 'Nome da Mãe:' },
             { type: 'date', name: 'birthdate', placeholder: 'Nascimento...', label: 'Data de Nascimento:' },
         ];
     }

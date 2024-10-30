@@ -13,6 +13,7 @@ export default {
       lightM: '#00B3F2',
       opaque: '#D9D9D9',
       alert: '#FF0000',
+      active: '#00FF90',
       transparent: '#00000000'
     },
     extend: {

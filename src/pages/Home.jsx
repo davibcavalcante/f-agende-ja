@@ -1,10 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getCards } from '../utils/cards';
 
 import Header from "../components/Header";
 import Footer from '../components/Footer';
+import { useEffect } from 'react';
 
 const Home = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = JSON.parse(localStorage.getItem('auth_token'));
+        if (!token) return navigate('/registro');
+    }, [])
 
     const cards = getCards();
 

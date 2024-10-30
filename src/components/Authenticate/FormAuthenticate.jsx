@@ -1,11 +1,25 @@
-import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { getInputs } from '../../utils/authenticate';
+
+import { useNavigate } from 'react-router-dom';
+import { postLogin, postRegister } from '../../api/auth';
 
 import logoIcon from '../../assets/logo-icon.png'
 
 const FormAuthenticate = ({ action }) => {
-    const sendData = () => {
+    const navigate = useNavigate();
 
+    const sendData = async (e) => {
+        e.preventDefault();
+        const form = e.target
+
+        if (action === 'Login') {
+            const isLoggedIn = await postLogin({ cpf: form.cpf.value, senha: form.password.value })
+            if (isLoggedIn) return navigate('/')
+        }
+
+        const isRegistered = await postRegister({ nome: form.name.value, senha: form.password.value, mae: form.mother.value, nascimento: form.birthdate.value, cpf: form.cpf.value })
+        if (isRegistered) return navigate('/')
     }
 
     const inputs = getInputs(action);
@@ -31,9 +45,16 @@ const FormAuthenticate = ({ action }) => {
                         )
                     }
 
-                    <button className='text-white bg-darkM font-poppins font-semibold px-8 py-2 rounded-lg' type='submit'>
+                    <button className='text-white bg-darkM font-poppins font-semibold px-8 py-2 rounded-lg w-3/4 m-auto block' type='submit'>
                         {action === 'Login' ? 'LOGAR' : 'REGISTRAR'}
                     </button>
+                    <div>
+                        {action === 'Login' ? 
+                            <p className='text-center font-poppins font-medium mt-4'>Ainda não tem uma conta? <Link to='/registro' className='text-lightM'>Cadastre-se.</Link></p> 
+                            : 
+                            <p className='text-center font-poppins font-medium mt-4'>Já tem uma conta? <Link to='/login' className='text-lightM'>Faça login.</Link></p>
+                        }
+                    </div>
                 </form>
             </div>
         </section>
