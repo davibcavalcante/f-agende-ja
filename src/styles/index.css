@@ -10,7 +10,7 @@
     }
     
     .scrollbar-h-5::-webkit-scrollbar {
-        height: 5px;
+        height: 10px;
     }
 
     .scrollbar-track-black::-webkit-scrollbar-track {

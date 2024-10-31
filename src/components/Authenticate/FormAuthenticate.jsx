@@ -1,24 +1,30 @@
 import { Link } from 'react-router-dom';
 import { getInputs } from '../../utils/authenticate';
 
+import { loading } from '../../utils/animations';
 import { useNavigate } from 'react-router-dom';
 import { postLogin, postRegister } from '../../api/auth';
 
 import logoIcon from '../../assets/logo-icon.png'
+import { useState } from 'react';
+import { LifeLine, OrbitProgress, ThreeDot } from 'react-loading-indicators';
 
 const FormAuthenticate = ({ action }) => {
+    const [loading, setLoading] = useState();
     const navigate = useNavigate();
 
     const sendData = async (e) => {
         e.preventDefault();
-        const form = e.target
+        const form = e.target;
+
+        const cpf = form.cpf.value.replace(/[.-]/g, '');
 
         if (action === 'Login') {
-            const isLoggedIn = await postLogin({ cpf: form.cpf.value, senha: form.password.value })
+            const isLoggedIn = await postLogin({ cpf, senha: form.password.value }, setLoading);
             if (isLoggedIn) return navigate('/')
         }
 
-        const isRegistered = await postRegister({ nome: form.name.value, senha: form.password.value, mae: form.mother.value, nascimento: form.birthdate.value, cpf: form.cpf.value })
+        const isRegistered = await postRegister({ nome: form.name.value, senha: form.password.value, mae: form.mother.value, nascimento: form.birthdate.value, cpf });
         if (isRegistered) return navigate('/')
     }
 
@@ -45,8 +51,12 @@ const FormAuthenticate = ({ action }) => {
                         )
                     }
 
-                    <button className='text-white bg-darkM font-poppins font-semibold px-8 py-2 rounded-lg w-3/4 m-auto block' type='submit'>
-                        {action === 'Login' ? 'LOGAR' : 'REGISTRAR'}
+                    <button className='text-white bg-darkM font-poppins font-semibold px-8 py-2 rounded-lg w-3/4 m-auto block shadow-xl' type='submit'>
+                        {loading ?
+                            <ThreeDot color={"#FFF"} size='small'/>
+                            :
+                            action === 'Login' ? 'LOGAR' : 'REGISTRAR'
+                        }
                     </button>
                     <div>
                         {action === 'Login' ? 

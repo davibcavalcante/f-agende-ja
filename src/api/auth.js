@@ -1,7 +1,8 @@
 import { apiFetch } from "../axios/config";
 
-export const postLogin = async (formData) => {
+export const postLogin = async (formData, setLoading) => {
     try {
+        setLoading(true);
         const results = await apiFetch.post('/login', formData);
 
         const token = await results.data.token;
@@ -10,15 +11,18 @@ export const postLogin = async (formData) => {
         localStorage.setItem('auth_token', JSON.stringify(token));
         localStorage.setItem('user_id', JSON.stringify(userId));
 
+        setLoading(false);
         return true
     } catch (err) {
         console.log(err);
+        setLoading(false);
         return false
     }
 }
 
-export const postRegister = async (formData) => {
+export const postRegister = async (formData, setLoading) => {
     try {
+        setLoading(true);
         const results = await apiFetch.post('/register', formData);
 
         const token = await results.data.token;
@@ -27,9 +31,11 @@ export const postRegister = async (formData) => {
         localStorage.setItem('auth_token', JSON.stringify(token));
         localStorage.setItem('user_id', JSON.stringify(userId));
 
+        setLoading(false);
        return true
     } catch (err) {
         console.log('Não foi possível registrar o usuário', err);
+        setLoading(false);
         return false
     }
 };

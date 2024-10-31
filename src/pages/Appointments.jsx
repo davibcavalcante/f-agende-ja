@@ -11,6 +11,10 @@ const Appointments = () => {
     const [slots, setSlots] = useState([]);
     const [activeSlotId, setActiveSlotId] = useState(null);
 
+    const [isShowMessage, setIsShowMessage] = useState(false);
+    const [message, setMessage] = useState('');
+    const [id, setId] = useState('');
+
     const handleSlotClick = (id) => {
         setActiveSlotId((prevId) => (prevId === id ? null : id));
     };
@@ -18,6 +22,12 @@ const Appointments = () => {
     const callToGetSlots = async () => {
         const results = await getSlots();
         setSlots(results)
+    }
+
+    const showMessage = (show, message, id) => {
+        setIsShowMessage(show);
+        setMessage(message);
+        setId(id);
     }
 
     useEffect(() => {
@@ -48,8 +58,9 @@ const Appointments = () => {
                 paciente_rg: form.rg.value
             });
 
-            console.log(message, id)
-            // TODO: ATUALIZAR AS VAGAS APÓS AGENDAMENTO - MOSTRAR MENSAGEM DE SUCESSO | LIMPAR FORMULÁRIO |
+            callToGetSlots();
+            showMessage(true, message, id)
+            form.reset();
         }
     }
 
@@ -58,8 +69,8 @@ const Appointments = () => {
     return (
         <section>
             <Header />
-            <section className="min-h-home bg-scheduling bg-cover flex flex-col justify-center items-center py-8">
-                <section className="bg-white rounded-xl shadow-xl w-full max-w-3xl 2xl:max-w-4xl">
+            <section className="relative min-h-home bg-scheduling bg-cover flex flex-col justify-center items-center py-8">
+                <section className={`bg-white rounded-xl shadow-xl w-full max-w-3xl 2xl:max-w-4xl ${isShowMessage ? 'blur-sm' : ''}`}>
                     <section className="py-8 px-4">
                         <div>
                             <h1 className="text-darkM font-poppins font-semibold text-3xl text-center">AGENDAMENTO DE <span className="text-lightM">CONSULTA</span></h1>
@@ -96,6 +107,19 @@ const Appointments = () => {
                         </form>
                     </section>
                 </section>
+                {isShowMessage &&
+                    <section className="bg-white w-full max-w-2xl absolute p-4 rounded-xl shadow-xl">
+                        <h1 className="text-darkM text-center text-2xl font-bold mb-4">{message}</h1>
+                        <p className="text-center mb-4 text-lg text-gray">
+                            Você receberá um e-mail confirmando a sua consulta. <br /> <span className="text-alert">n° {id}</span>
+                        </p>
+                        <div className="flex justify-center items-center">
+                            <button className="bg-darkM text-white p-2 w-1/3 rounded-lg shadow-lg" onClick={() => showMessage(false, '', '')}>
+                                OK
+                            </button>
+                        </div>
+                    </section>
+                }
             </section>
             <Footer />
         </section>
