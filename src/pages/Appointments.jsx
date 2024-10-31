@@ -49,7 +49,7 @@ const Appointments = () => {
             });
 
             console.log(message, id)
-            // TODO: ATUALIZAR AS VAGAS APÓS AGENDAMENTO | LIMPAR FORMULÁRIO | MENU HAMBURGUER PARA FRONTEND
+            // TODO: ATUALIZAR AS VAGAS APÓS AGENDAMENTO - MOSTRAR MENSAGEM DE SUCESSO | LIMPAR FORMULÁRIO |
         }
     }
 

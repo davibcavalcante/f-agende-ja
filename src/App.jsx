@@ -1,10 +1,13 @@
 import { Outlet } from 'react-router-dom';
 
+import { MenuProvider } from './contexts/Menu';
 
 const App = () => {
   return (
     <section className="overflow-hidden">
-      <Outlet/>
+      <MenuProvider>
+        <Outlet/>
+      </MenuProvider>
     </section>
   )
 }

@@ -19,7 +19,7 @@ const Home = () => {
         <section>
             <Header />
             <section className="flex bg-home1 bg-cover min-h-home py-12 px-4 relative after:absolute after:w-full after:h-full after:bg-black after:left-0 after:top-0 after:bg-opacity-30 after:z-0 lg:px-8">
-                <div className="flex flex-col w-full max-w-lg relative z-50 2xl:max-w-5xl">
+                <div className="flex flex-col w-full max-w-lg relative z-40 2xl:max-w-5xl">
                     <div className="flex-1 flex flex-col gap-4">
                         <h1 className="text-darkM font-poppins font-semibold text-3xl lg:text-4xl 2xl:text-6xl">Atendimento <br /> <span className="text-lightM">acolhedor</span> e <span className="text-lightM">humanizado</span></h1>
                         <p className="text-white font-poppins text-lg 2xl:text-xl 2xl:max-w-xl">
