@@ -19,12 +19,12 @@ const FormAuthenticate = ({ action }) => {
 
         if (action === 'Login') {
             const isLoggedIn = await postLogin({ cpf, senha: form.password.value }, setLoading);
-            if (isLoggedIn) return navigate('/')
+            if (isLoggedIn) return navigate('/f-agende-ja')
         }
 
         if (action === 'Register') {
             const isRegistered = await postRegister({ nome: form.name.value, senha: form.password.value, mae: form.mother.value, nascimento: form.birthdate.value, cpf });
-            if (isRegistered) return navigate('/')
+            if (isRegistered) return navigate('/f-agende-ja')
         }
     }
 
@@ -60,9 +60,9 @@ const FormAuthenticate = ({ action }) => {
                     </button>
                     <div>
                         {action === 'Login' ?
-                            <p className='text-center font-poppins font-medium mt-4'>Ainda não tem uma conta? <Link to='/registro' className='text-lightM'>Cadastre-se.</Link></p>
+                            <p className='text-center font-poppins font-medium mt-4'>Ainda não tem uma conta? <Link to='/f-agende-ja/registro' className='text-lightM'>Cadastre-se.</Link></p>
                             :
-                            <p className='text-center font-poppins font-medium mt-4'>Já tem uma conta? <Link to='/login' className='text-lightM'>Faça login.</Link></p>
+                            <p className='text-center font-poppins font-medium mt-4'>Já tem uma conta? <Link to='/f-agende-ja/login' className='text-lightM'>Faça login.</Link></p>
                         }
                     </div>
                 </form>

@@ -10,7 +10,7 @@ const Home = () => {
 
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem('auth_token'));
-        if (!token) return navigate('/registro');
+        if (!token) return navigate('/f-agende-ja/registro');
     }, [])
 
     const cards = getCards();
@@ -27,7 +27,7 @@ const Home = () => {
                         </p>
                     </div>
                     <div>
-                        <Link to='/agendamento' className='bg-lightM text-white text-lg font-bold py-3 px-4 rounded-lg shadow-lg'>AGENDAR AGORA</Link>
+                        <Link to='/f-agende-ja/agendamento' className='bg-lightM text-white text-lg font-bold py-3 px-4 rounded-lg shadow-lg'>AGENDAR AGORA</Link>
                     </div>
                 </div>
             </section>

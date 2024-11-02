@@ -12,7 +12,7 @@ import Appointments from './pages/Appointments';
 
 const router = createBrowserRouter([
   {
-    path: '/f-agende-ja',
+    path: '/',
     element: <App/>,
     errorElement: <Error/>,
     children: [
@@ -21,15 +21,15 @@ const router = createBrowserRouter([
         element: <Home/>
       },
       {
-        path: '/agendamento',
+        path: '/f-agende-ja/agendamento',
         element: <Appointments/>
       },
       {
-        path: 'registro',
+        path: '/f-agende-ja/registro',
         element: <Authenticate action="Register"/>
       },
       {
-        path: 'login',
+        path: '/f-agende-ja/login',
         element: <Authenticate action="Login"/>
       }
     ],
