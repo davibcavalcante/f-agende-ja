@@ -6,7 +6,7 @@ import FormAuthenticate from "../components/Authenticate/FormAuthenticate";
 const Authenticate = ({ action }) => {
     return (
         <section className="bg-authenticate bg-cover bg-fixed w-screen min-h-screen lg:flex lg:justify-center lg:p-8">
-            <section className="bg-darkM hidden xl:flex xl:flex-col xl:p-8 xl:rounded-tl-xl xl:rounded-bl-xl">
+            <section className="bg-darkM hidden xl:flex xl:flex-col xl:p-8 xl:rounded-tl-xl xl:rounded-bl-xl xl:gap-8">
                 <div className="flex flex-col max-w-2xl gap-4 flex-1">
                     <h1 className="text-white text-4xl font-poppisn font-bold">Agende Já</h1>
                     <p className="text-white text-lg font-poppins font-light border-b-2 pb-4">

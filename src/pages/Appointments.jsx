@@ -6,9 +6,12 @@ import { postAppointments } from "../api/appointments";
 import { getInputs } from "../utils/scheduling";
 import { getSlots } from "../utils/slots";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { LifeLine } from "react-loading-indicators";
 
 const Appointments = () => {
+    const navigate = useNavigate();
+
     const [slots, setSlots] = useState([]);
     const [activeSlotId, setActiveSlotId] = useState(null);
 
@@ -22,6 +25,7 @@ const Appointments = () => {
 
     const callToGetSlots = async () => {
         const results = await getSlots();
+        if (!results) navigate('/f-agende-ja') 
         setSlots(results)
     }
 
@@ -33,7 +37,7 @@ const Appointments = () => {
 
     useEffect(() => {
         callToGetSlots()
-    }, [])
+    }, []);
 
     const sendData = async (e) => {
         e.preventDefault();
