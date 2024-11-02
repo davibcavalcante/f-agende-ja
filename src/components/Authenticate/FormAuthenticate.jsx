@@ -1,13 +1,11 @@
-import { Link } from 'react-router-dom';
-import { getInputs } from '../../utils/authenticate';
+import { useNavigate, Link } from 'react-router-dom';
+import { useState } from 'react';
+import { ThreeDot } from 'react-loading-indicators';
 
-import { loading } from '../../utils/animations';
-import { useNavigate } from 'react-router-dom';
+import { getInputs } from '../../utils/authenticate';
 import { postLogin, postRegister } from '../../api/auth';
 
 import logoIcon from '../../assets/logo-icon.png'
-import { useState } from 'react';
-import { LifeLine, OrbitProgress, ThreeDot } from 'react-loading-indicators';
 
 const FormAuthenticate = ({ action }) => {
     const [loading, setLoading] = useState();
@@ -24,8 +22,10 @@ const FormAuthenticate = ({ action }) => {
             if (isLoggedIn) return navigate('/')
         }
 
-        const isRegistered = await postRegister({ nome: form.name.value, senha: form.password.value, mae: form.mother.value, nascimento: form.birthdate.value, cpf });
-        if (isRegistered) return navigate('/')
+        if (action === 'Register') {
+            const isRegistered = await postRegister({ nome: form.name.value, senha: form.password.value, mae: form.mother.value, nascimento: form.birthdate.value, cpf });
+            if (isRegistered) return navigate('/')
+        }
     }
 
     const inputs = getInputs(action);
@@ -53,15 +53,15 @@ const FormAuthenticate = ({ action }) => {
 
                     <button className='text-white bg-darkM font-poppins font-semibold px-8 py-2 rounded-lg w-3/4 m-auto block shadow-xl' type='submit'>
                         {loading ?
-                            <ThreeDot color={"#FFF"} size='small'/>
+                            <ThreeDot color={"#FFF"} size='small' />
                             :
                             action === 'Login' ? 'LOGAR' : 'REGISTRAR'
                         }
                     </button>
                     <div>
-                        {action === 'Login' ? 
-                            <p className='text-center font-poppins font-medium mt-4'>Ainda não tem uma conta? <Link to='/registro' className='text-lightM'>Cadastre-se.</Link></p> 
-                            : 
+                        {action === 'Login' ?
+                            <p className='text-center font-poppins font-medium mt-4'>Ainda não tem uma conta? <Link to='/registro' className='text-lightM'>Cadastre-se.</Link></p>
+                            :
                             <p className='text-center font-poppins font-medium mt-4'>Já tem uma conta? <Link to='/login' className='text-lightM'>Faça login.</Link></p>
                         }
                     </div>
