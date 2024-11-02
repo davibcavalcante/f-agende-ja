@@ -6,6 +6,7 @@ import { postAppointments } from "../api/appointments";
 import { getInputs } from "../utils/scheduling";
 import { getSlots } from "../utils/slots";
 import { useEffect, useState } from "react";
+import { LifeLine } from "react-loading-indicators";
 
 const Appointments = () => {
     const [slots, setSlots] = useState([]);
@@ -77,7 +78,8 @@ const Appointments = () => {
                         </div>
                     </section>
                     <section className="py-4 flex overflow-auto scrollbar-h-5 scrollbar-track-black scrollbar-thumb-black">
-                        {slots.map((slot) => (
+                        {slots.length > 0 ? 
+                            slots.map((slot) => (
                             <Slots
                                 key={slot.id}
                                 date={slot.date}
@@ -87,7 +89,11 @@ const Appointments = () => {
                                 isActive={activeSlotId === slot.id}
                                 onClick={() => handleSlotClick(slot.id)}
                             />
-                        ))}
+                        )) :
+                            <div className="flex justify-center items-center w-full">
+                                <LifeLine color={'#00B3F2'}/>
+                            </div>
+                        }
                     </section>
                     <section className="p-4">
                         <form autoComplete="off" onSubmit={sendData}>
